@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var runningNumber = ""
     
     // list of operations
-    enum Operations: String {
+    enum Operation: String {
         case Divide = "/"
         case Multiply = "*"
         case Subtract = "-"
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         case Empty = "Empty"
     }
     
-    var currentOperation = "Empty"
+    var currentOperation = Operation.Empty
     var leftValString = ""
     var rightValString = ""
     var result = ""
@@ -67,8 +67,8 @@ class ViewController: UIViewController {
         btnSound.play()
     }
     
-    func processOrder(operation: Operations) {
-        if currentOperation != Operations.Empty {
+    func processOrder(operation: Operation) {
+        if currentOperation != Operation.Empty {
             
             // a user selects an operator after another oeprator
             
@@ -76,12 +76,12 @@ class ViewController: UIViewController {
                 rightValString = runningNumber
                 runningNumber = ""
                 
-                if currentOperation == Operations.Multiply {
+                if currentOperation == Operation.Multiply {
                     
-                } else if currentOperation == Operations.Divide {
+                } else if currentOperation == Operation.Divide {
                 
-                }else if currentOperation == Operations.Add {
-                }else if currentOperation == Operations.Subtract {
+                }else if currentOperation == Operation.Add {
+                }else if currentOperation == Operation.Subtract {
                     
                 }
             }
