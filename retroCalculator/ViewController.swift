@@ -47,7 +47,7 @@ class ViewController: UIViewController {
             
         }
         
-        
+        outputLbl.text = "0"
     }
     
     @IBAction func numberPressed(sender: UIButton) {
@@ -58,7 +58,25 @@ class ViewController: UIViewController {
         outputLbl.text = runningNumber
     }
     
+    @IBAction func onDividePressed(sender: AnyObject) {
+        processOrder(operation: .Divide)
+    }
     
+    @IBAction func onMultiplyPressed(sender: AnyObject) {
+        processOrder(operation: .Multiply)
+    }
+    
+    @IBAction func onAddPressed(sender: AnyObject) {
+        processOrder(operation: .Add)
+    }
+    
+    @IBAction func onSubtractPressed(sender: AnyObject) {
+        processOrder(operation: .Subtract)
+    }
+    
+    @IBAction func onEqualPressed(sender: AnyObject) {
+        processOrder(operation: currentOperation)
+    }
     func playSound() {
         if btnSound.isPlaying {
             btnSound.stop()
@@ -68,6 +86,7 @@ class ViewController: UIViewController {
     }
     
     func processOrder(operation: Operation) {
+        playSound()
         if currentOperation != Operation.Empty {
             
             // a user selects an operator after another oeprator
@@ -77,14 +96,24 @@ class ViewController: UIViewController {
                 runningNumber = ""
                 
                 if currentOperation == Operation.Multiply {
-                    
+                    result = "\(Double(leftValString)! * Double(rightValString)!)"
                 } else if currentOperation == Operation.Divide {
-                
+                    result = "\(Double(leftValString)! / Double(rightValString)!)"
+
                 }else if currentOperation == Operation.Add {
+                    result = "\(Double(leftValString)! + Double(rightValString)!)"
                 }else if currentOperation == Operation.Subtract {
-                    
+                    result = "\(Double(leftValString)! - Double(rightValString)!)"
+
                 }
+                leftValString = result
+                outputLbl.text = result
             }
+            currentOperation = operation
+        } else {
+            leftValString = runningNumber
+            runningNumber = ""
+            currentOperation = operation
         }
     }
 
